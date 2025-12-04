@@ -21,15 +21,12 @@ RUN apt update && apt install --yes --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && npm install -g tsx
 
-# Create node user
-RUN useradd -m -s /bin/bash node
-
 # Set up working directory
 WORKDIR /app
 
-# Copy package files first for better caching
-COPY package*.json ./
-RUN npm ci
+# Copy package files explicitly
+COPY package.json package-lock.json ./
+RUN npm install
 
 # Copy the rest of the application
 COPY . .
