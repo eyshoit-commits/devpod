@@ -1,4 +1,4 @@
-FROM node:22-bookworm-slim
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-16-buster
 
 # Install system dependencies including Docker CLI
 RUN apt-get update && apt-get install --yes --no-install-recommends \
