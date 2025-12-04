@@ -39,6 +39,13 @@ COPY . .
 # Create data directory
 RUN mkdir -p ./data
 
+# Set up SSH for remote access
+RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh
+
+# Add authorized keys for SSH access
+COPY .devcontainer/authorized_keys /root/.ssh/authorized_keys
+RUN chmod 600 /root/.ssh/authorized_keys
+
 # Set environment variables
 ENV UV_USE_IO_URING=0
 ENV NODE_ENV=development
